@@ -13,5 +13,8 @@ vcftools --vcf Seita.2G444300_up_down_500k_snp.vcf \
          --weir-fst-pop w4_sample.txt \
          --out k7_snps \
          --fst-window-size 20000 --fst-window-step 2000  # 窗口20k，步长2k
-# --weir-fst-population 这个命令是告诉计算机需要计算的群体ID名，该文件必须是txt格式，每个ID占一行，每次计算两个群之间的关系，因此需要population_1.txt，population_2.txt...
-如果单点计算的话就不加后面的窗口和步长
+# --weir-fst-population 群体文件名称(txt格式，一个样本ID一行)
+# --fst-window-size 20000 指定窗口大小
+# --fst-window-step 2000 指定步长
+# 如果计算每个位点的话就不加后面的窗口和步长
+vcftools --vcf xxx.vcf --weir-fst-pop xxx.sample1  --weir-fst-pop xxx.sample2 --out xxx.fst --fst-window-size 20000 --fst-window-step 2000
