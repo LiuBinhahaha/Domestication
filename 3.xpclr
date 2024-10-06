@@ -1,0 +1,23 @@
+跨群体复合似然比检验是一种是基于选择扫荡（selective sweeep）的似然方法。
+XP-CLR 利用了两个群体之间的多基因座等位基因频率差异（multilocus allele frequency differentiation）建立模型，使用布朗运动来模拟中性下的遗传漂移，并使用确定性模型来近似地对附近的单核苷酸多态性（SNPs）进行选择性扫描。
+所使用的软件是基于python开发的xpclr
+
+软件所需环境：python3.9  numpy==1.24.3
+foxtailmillet server conda environment: conda activate python3.9
+cluster server environment: conda activate python3.9
+
+###该软件输入的两个sanple文件中的样本相加必须与vcf文件中的样本数一致。此外，输入的vcf文件必须是非压缩文件
+
+xpclr --out 1094_xpclr_chrxxx -Sa 1094_cul.txt -Sb 1094_wild.txt -I 1094_SNP_ID.vcf -C xxx --ld 0.95 --phased --size 20000 --step 2000 --rrate  1e-8
+# -C  染色体
+# --phased 填充
+# --ld LD cutoff to apply for weighting
+# --size 窗口大小
+# --step 步长
+# --rrate recombination rate per base
+
+输出所有染色体的计算脚本：
+for i in {1..10}; do sed "s/xxx/${i}/g" example.xpclr > chr${i}.sh | chmod +x chr${i}.sh; done
+
+# 如果是在集群提交多条染色体的脚本：sample=$(ls *.sh); for i in ${sample}; do qsub -l cpu=2:mem=30G --env -cwd ${i}; done
+# 如果是在foxtailmillet server提交多条染色体的脚本：sample=$(ls *.sh); parallel -j 10 'echo {} && bash {}' ::: "${sample[@]}"
