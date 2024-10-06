@@ -6,7 +6,7 @@ XP-CLR 利用了两个群体之间的多基因座等位基因频率差异（mult
 foxtailmillet server conda environment: conda activate python3.9
 cluster server environment: conda activate python3.9
 
-###该软件输入的两个sanple文件中的样本相加必须与vcf文件中的样本数一致。此外，输入的vcf文件必须是非压缩文件
+###该软件输入的两个sample文件中的样本相加必须与vcf文件中的样本数一致。此外，输入的vcf文件必须是非压缩文件
 
 xpclr --out 1094_xpclr_chrxxx -Sa 1094_cul.txt -Sb 1094_wild.txt -I 1094_SNP_ID.vcf -C xxx --ld 0.95 --phased --size 20000 --step 2000 --rrate  1e-8
 # -C  染色体
