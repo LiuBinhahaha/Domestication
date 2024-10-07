@@ -1,21 +1,30 @@
 import gzip
 import re
+import argparse
 
-gff = open("/home/liubin/ref/broomcorn/mizi.gff3", 'r')
+gff = open("/home/liubin/software/snpEff/data/sorghum_t2t/genes.gff", 'r')
 
 dic = {}
 for line in gff:
     _line = line.rstrip().split('\t')
+    chr = _line[0].replace('C','c')
 
     if re.match('gene', _line[2]):
         gene = re.search("ID=(.*?);", _line[8]).group(1)
-        if _line[0] not in dic:
-            dic[_line[0]] = []
-        dic[_line[0]].append(f'{_line[3]}_{_line[4]}_{gene}')
+        if chr not in dic:
+            dic[chr] = []
+        dic[chr].append(f'{_line[3]}_{_line[4]}_{gene}')
 gff.close()
 
-file = open("merged_1094_wild_cul.windowed.weir.fst_selected_region.txt", 'r')
-out = open("merged_1094_wild_cul.windowed.weir.fst_selected_region_add_genes.txt", 'w')
+parser = argparse.ArgumentParser(description="Add genes for the selected regions in Fst result")
+
+parser.add_argument('--input', '-i', type=str, required=True, help="Input Fst selected region file name (e.g., merged_sorghum_100k_2k.windowed.weir.fst_selected_region.txt")
+parser.add_argument('--output', '-o', type=str, required=True, help="Ouput file for selected regions add genes (e.g. merged_sorghum_100k_2k.windowed.weir.fst_selected_region_add_genes.txt)")
+
+args = parser.parse_args()
+
+file = open(args.input, 'r')
+out = open(args.output, 'w')
 
 for line in file:
     if line.startswith("CHROM"):
@@ -38,3 +47,6 @@ for line in file:
  
 file.close()
 out.close()
+
+
+
