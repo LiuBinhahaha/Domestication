@@ -21,3 +21,7 @@ for i in {1..10}; do sed "s/xxx/${i}/g" example.xpclr > chr${i}.sh | chmod +x ch
 
 # 如果是在集群提交多条染色体的脚本：sample=$(ls *.sh); for i in ${sample}; do qsub -l cpu=2:mem=30G --env -cwd ${i}; done
 # 如果是在foxtailmillet server提交多条染色体的脚本：sample=$(ls *.sh); parallel -j 10 'echo {} && bash {}' ::: "${sample[@]}"
+
+# 合并所有染色体的xpclr结果(仅保留一个表头)：
+awk 'NR==1 || FNR>1' chr*.xpclr > species_winxxk_xxk.xplclr
+# shell中 || 表示"或"  &&表示"且"
