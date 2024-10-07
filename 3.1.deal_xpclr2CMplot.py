@@ -2,8 +2,8 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Deal xpclr result for CMplot based on input files.")
 
-parser.add_argument('--input', '-i', type=str, required=True, help="Input xpclr result file name (e.g., broomcorn_win200k_2k.xplclr")
-parser.add_argument('--output', '-o', type=str, required=True, help="Ouput file for CMplot (e.g. broomcorn_win200k_2k.for_plot.xpclr)")
+parser.add_argument('--input', '-i', type=str, required=True, help="Input xpclr result file name (e.g., broomcorn_win100k_2k.xplclr")
+parser.add_argument('--output', '-o', type=str, required=True, help="Ouput file for CMplot (e.g. broomcorn_win100k_2k.for_plot.xpclr)")
 
 args = parser.parse_args()
 
