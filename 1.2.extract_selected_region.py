@@ -6,7 +6,7 @@ import subprocess
 parser = argparse.ArgumentParser(description="Extract selective region in Fst result")
 
 parser.add_argument('--input', '-i', type=str, required=True, help="Input fst result file name (e.g., 1094_wild_cul.windowed.weir.fst")
-parser.add_argument('--output', '-o', type=str, required=True, help="Ouput file for CMplot (e.g. 1094_wild_cul.windowed.weir.fst_selected_region.txt)")
+parser.add_argument('--output', '-o', type=str, required=True, help="Ouput file for selected region (e.g. 1094_wild_cul.windowed.weir.fst_selected_region.txt)")
 
 args = parser.parse_args()
 
