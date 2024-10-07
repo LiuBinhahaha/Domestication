@@ -1,6 +1,6 @@
 import gzip
 import re
-
+import argparse
 gff = open("/home/liubin/ref/broomcorn/mizi.gff3", 'r')
 
 dic = {}
@@ -14,8 +14,15 @@ for line in gff:
         dic[_line[0]].append(f'{_line[3]}_{_line[4]}_{gene}')
 gff.close()
 
-file = open("merged_wild_cul_rod.selected_region.txt", 'r')
-out = open("merged_wild_cul_rod.selected_region_add_genes.txt", 'w')
+parser = argparse.ArgumentParser(description="Add genes for the selected regions in Pi result")
+
+parser.add_argument('--input', '-i', type=str, required=True, help="Input Pi selected region file name (e.g., merged_wild_cul_rod.selected_region.txt")
+parser.add_argument('--output', '-o', type=str, required=True, help="Ouput file for selected regions add genes (e.g. merged_wild_cul_rod.selected_region_add_genes.txt)")
+
+args = parser.parse_args()
+
+file = open(args.input, 'r')
+out = open(args.output, 'w')
 
 for line in file:
     if line.startswith("CHROM"):
